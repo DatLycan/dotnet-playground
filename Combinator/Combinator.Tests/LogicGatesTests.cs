@@ -12,8 +12,11 @@ public class LogicGatesTests
   [TestCase(false, false, false, TestName = "False_And_False_Returns_False")]
   public void AndTest(bool first, bool second, bool expected)
   {
-    var chain = Combinator.Where<object>(_ => first).And(_ => second).Build();
-    var result = chain(default!);
+    var result = Combinator
+      .Where<object>(_ => first)
+      .And(_ => second)
+      .Using(default);
+
     Assert.That(result, Is.EqualTo(expected));
   }
 
@@ -23,8 +26,11 @@ public class LogicGatesTests
   [TestCase(false, false, false, TestName = "False_Or_False_Returns_False")]
   public void OrTest(bool first, bool second, bool expected)
   {
-    var chain = Combinator.Where<object>(_ => first).Or(_ => second).Build();
-    var result = chain(default!);
+    var result = Combinator
+      .Where<object>(_ => first)
+      .Or(_ => second)
+      .Using(default);
+
     Assert.That(result, Is.EqualTo(expected));
   }
 
@@ -32,8 +38,11 @@ public class LogicGatesTests
   [TestCase(false, true, TestName = "Not_False_Returns_True")]
   public void NotTest(bool input, bool expected)
   {
-    var chain = Combinator.Where<object>(_ => input).Not().Build();
-    var result = chain(default!);
+    var result = Combinator
+      .Where<object>(_ => input)
+      .Not()
+      .Using(default);
+
     Assert.That(result, Is.EqualTo(expected));
   }
 }

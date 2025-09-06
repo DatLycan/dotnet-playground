@@ -18,13 +18,12 @@ public class ConcreteSourceTests
     bool expected
   )
   {
-    var combinatorChain = Combinator
+    var result = Combinator
       .Where<TestSource>(source => source.Amount > 4)
       .And(source => source.Amount < 6)
       .And(source => source.IsActive is true)
-      .Build();
+      .Using(new TestSource(amount, isActive));
 
-    var result = combinatorChain(new TestSource(amount, isActive));
     Assert.That(result, Is.EqualTo(expected));
   }
 }

@@ -58,8 +58,10 @@ public readonly struct Combinator<TSource>
   }
 
   /// <summary>
-  /// Gets the underlying predicate function.
+  /// Evaluates the combined predicate against a source object.
   /// </summary>
+  /// <param name="source">The source object to test.</param>
+  /// <returns>True if the object satisfies the predicate; otherwise, false.</returns>
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  public Func<TSource, bool> Build() => predicate;
+  public bool Using(TSource source) => predicate(source);
 }
