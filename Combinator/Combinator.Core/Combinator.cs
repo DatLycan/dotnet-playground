@@ -18,6 +18,7 @@ public readonly struct Combinator<TSource>
   /// <typeparam name="TSource">The type of the source object.</typeparam>
   /// <param name="predicate">The initial predicate function.</param>
   /// <returns>A new Combinator struct with the initial predicate.</returns>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
   public static Combinator<TSource> Where(Func<TSource, bool> predicate)
   {
     return new(predicate);
