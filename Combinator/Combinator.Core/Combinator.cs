@@ -48,6 +48,36 @@ public readonly struct Combinator<TSource>
   }
 
   /// <summary>
+  /// Combines the current combinator with a new one using a logical XOR.
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Combinator<TSource> Xor(Func<TSource, bool> next)
+  {
+    var prev = predicate;
+    return new(s => prev(s) ^ next(s));
+  }
+
+  /// <summary>
+  /// Combines the current combinator with a new one using a logical NAND (Not-AND).
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Combinator<TSource> Nand(Func<TSource, bool> next)
+  {
+    var prev = predicate;
+    return new(s => !(prev(s) && next(s)));
+  }
+
+  /// <summary>
+  /// Combines the current combinator with a new one using a logical NOR (Not-OR).
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Combinator<TSource> Nor(Func<TSource, bool> next)
+  {
+    var prev = predicate;
+    return new(s => !(prev(s) || next(s)));
+  }
+
+  /// <summary>
   /// Inverts the result of the current combinator using a logical NOT.
   /// </summary>
   [MethodImpl(MethodImplOptions.AggressiveInlining)]

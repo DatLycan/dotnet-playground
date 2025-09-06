@@ -34,6 +34,48 @@ public class LogicGatesTests
     Assert.That(result, Is.EqualTo(expected));
   }
 
+  [TestCase(true, true, false, TestName = "True_Xor_True_Returns_False")]
+  [TestCase(true, false, true, TestName = "True_Xor_False_Returns_True")]
+  [TestCase(false, true, true, TestName = "False_Xor_True_Returns_True")]
+  [TestCase(false, false, false, TestName = "False_Xor_False_Returns_False")]
+  public void XorTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator
+        .Where<object>(_ => first)
+        .Xor(_ => second)
+        .Using(default);
+
+    Assert.That(result, Is.EqualTo(expected));
+  }
+
+  [TestCase(true, true, false, TestName = "True_Nand_True_Returns_False")]
+  [TestCase(true, false, true, TestName = "True_Nand_False_Returns_True")]
+  [TestCase(false, true, true, TestName = "False_Nand_True_Returns_True")]
+  [TestCase(false, false, true, TestName = "False_Nand_False_Returns_True")]
+  public void NandTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator
+        .Where<object>(_ => first)
+        .Nand(_ => second)
+        .Using(default);
+
+    Assert.That(result, Is.EqualTo(expected));
+  }
+
+  [TestCase(true, true, false, TestName = "True_Nor_True_Returns_False")]
+  [TestCase(true, false, false, TestName = "True_Nor_False_Returns_False")]
+  [TestCase(false, true, false, TestName = "False_Nor_True_Returns_False")]
+  [TestCase(false, false, true, TestName = "False_Nor_False_Returns_True")]
+  public void NorTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator
+        .Where<object>(_ => first)
+        .Nor(_ => second)
+        .Using(default);
+
+    Assert.That(result, Is.EqualTo(expected));
+  }
+  
   [TestCase(true, false, TestName = "Not_True_Returns_False")]
   [TestCase(false, true, TestName = "Not_False_Returns_True")]
   public void NotTest(bool input, bool expected)
