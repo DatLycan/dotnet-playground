@@ -94,4 +94,9 @@ public readonly struct Combinator<TSource>
   /// <returns>True if the object satisfies the combinator; otherwise, false.</returns>
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   public bool Using(TSource source) => predicate(source);
+
+  public static implicit operator Func<TSource, bool>(Combinator<TSource> combinator)
+  {
+    return combinator.predicate;
+  }
 }
