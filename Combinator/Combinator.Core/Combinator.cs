@@ -1,47 +1,65 @@
 namespace Combinator.Core;
 
+using System;
 using System.Runtime.CompilerServices;
+
+public static class Combinator
+{
+  /// <summary>
+  /// Serves as the starting point for a combinator chain.
+  /// </summary>
+  /// <typeparam name="TSource">The type of the source object.</typeparam>
+  /// <param name="predicate">The initial predicate function.</param>
+  /// <returns>A new Combinator struct with the initial predicate.</returns>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public static Combinator<TSource> Where<TSource>(Func<TSource, bool> predicate)
+  {
+    return new(predicate);
+  }
+}
 
 public readonly struct Combinator<TSource>
 {
-    // [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    // public static Combinator<TSource, TPredicate> With<TPredicate>(TPredicate predicate)
-    //     where TPredicate : struct, IPredicate<TSource>
-    // {
-    //     return new(predicate);
-    // }
-}
+  private readonly Func<TSource, bool> predicate;
 
-public readonly struct Combinator<TSource, TPredicate>
-    where TPredicate : struct, IPredicate<TSource>
-{
-    private readonly TPredicate predicate;
+  internal Combinator(Func<TSource, bool> predicate)
+  {
+    this.predicate = predicate;
+  }
 
-    internal Combinator(TPredicate predicate)
-    {
-        this.predicate = predicate;
-    }
+  /// <summary>
+  /// Combines the current combinator with a new one using a logical AND.
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Combinator<TSource> And(Func<TSource, bool> next)
+  {
+    var prev = predicate;
+    return new(s => prev(s) && next(s));
+  }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Combinator<TSource, And<TSource, TPredicate, TNext>> And<TNext>(TNext next)
-        where TNext : struct, IPredicate<TSource>
-    {
-        return new(new And<TSource, TPredicate, TNext>(predicate, next));
-    }
+  /// <summary>
+  /// Combines the current combinator with a new one using a logical OR.
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Combinator<TSource> Or(Func<TSource, bool> next)
+  {
+    var prev = predicate;
+    return new(s => prev(s) || next(s));
+  }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Combinator<TSource, Or<TSource, TPredicate, TNext>> Or<TNext>(TNext next)
-        where TNext : struct, IPredicate<TSource>
-    {
-        return new(new Or<TSource, TPredicate, TNext>(predicate, next));
-    }
+  /// <summary>
+  /// Inverts the result of the current combinator using a logical NOT.
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Combinator<TSource> Not()
+  {
+    var prev = predicate;
+    return new(s => !prev(s));
+  }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public Combinator<TSource, Not<TSource, TPredicate>> Not()
-    {
-        return new(new Not<TSource, TPredicate>(predicate));
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public TPredicate Build() => predicate;
+  /// <summary>
+  /// Gets the underlying predicate function.
+  /// </summary>
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  public Func<TSource, bool> Build() => predicate;
 }
