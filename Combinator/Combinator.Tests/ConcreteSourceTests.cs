@@ -18,8 +18,9 @@ public class ConcreteSourceTests
     bool expected
   )
   {
-    var result = Combinator
-      .Where<TestSource>(source => source.Amount > 4)
+
+    var result = Combinator<TestSource>
+      .Where(source => source.Amount > 4)
       .And(source => source.Amount < 6)
       .And(source => source.IsActive is true)
       .Using(new TestSource(amount, isActive));

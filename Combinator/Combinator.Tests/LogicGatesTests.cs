@@ -12,8 +12,8 @@ public class LogicGatesTests
   [TestCase(false, false, false, TestName = "False_And_False_Returns_False")]
   public void AndTest(bool first, bool second, bool expected)
   {
-    var result = Combinator
-      .Where<object>(_ => first)
+    var result = Combinator<object>
+      .Where(_ => first)
       .And(_ => second)
       .Using(default);
 
@@ -26,8 +26,8 @@ public class LogicGatesTests
   [TestCase(false, false, false, TestName = "False_Or_False_Returns_False")]
   public void OrTest(bool first, bool second, bool expected)
   {
-    var result = Combinator
-      .Where<object>(_ => first)
+    var result = Combinator<object>
+      .Where(_ => first)
       .Or(_ => second)
       .Using(default);
 
@@ -40,8 +40,8 @@ public class LogicGatesTests
   [TestCase(false, false, false, TestName = "False_Xor_False_Returns_False")]
   public void XorTest(bool first, bool second, bool expected)
   {
-    var result = Combinator
-        .Where<object>(_ => first)
+    var result = Combinator<object>
+        .Where(_ => first)
         .Xor(_ => second)
         .Using(default);
 
@@ -54,8 +54,8 @@ public class LogicGatesTests
   [TestCase(false, false, true, TestName = "False_Nand_False_Returns_True")]
   public void NandTest(bool first, bool second, bool expected)
   {
-    var result = Combinator
-        .Where<object>(_ => first)
+    var result = Combinator<object>
+        .Where(_ => first)
         .Nand(_ => second)
         .Using(default);
 
@@ -68,8 +68,8 @@ public class LogicGatesTests
   [TestCase(false, false, true, TestName = "False_Nor_False_Returns_True")]
   public void NorTest(bool first, bool second, bool expected)
   {
-    var result = Combinator
-        .Where<object>(_ => first)
+    var result = Combinator<object>
+        .Where(_ => first)
         .Nor(_ => second)
         .Using(default);
 
@@ -80,8 +80,8 @@ public class LogicGatesTests
   [TestCase(false, true, TestName = "Not_False_Returns_True")]
   public void NotTest(bool input, bool expected)
   {
-    var result = Combinator
-      .Where<object>(_ => input)
+    var result = Combinator<object>
+      .Where(_ => input)
       .Not()
       .Using(default);
 
