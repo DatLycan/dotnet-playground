@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Combinator", "Combinator", "{3F3EBDE4-2006-45B5-B4AA-A9709D579213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinator.Core", "Combinator\Combinator.Core\Combinator.Core.csproj", "{7F880C24-2BE2-44B9-A68C-3E28AF37B762}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinator", "Combinator\Combinator.Core\Combinator.csproj", "{7F880C24-2BE2-44B9-A68C-3E28AF37B762}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Combinator.Tests", "Combinator\Combinator.Tests\Combinator.Tests.csproj", "{ACD5F68A-D057-4D2D-83B7-C1EA83A51DE0}"
 EndProject
