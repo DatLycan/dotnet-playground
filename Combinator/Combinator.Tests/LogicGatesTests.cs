@@ -6,87 +6,87 @@ using NUnit.Framework;
 
 public class LogicGatesTests
 {
-	[TestCase(true, true, true, TestName = "T_And_T_Returns_T")]
-	[TestCase(true, false, false, TestName = "T_And_F_Returns_F")]
-	[TestCase(false, true, false, TestName = "F_And_T_Returns_F")]
-	[TestCase(false, false, false, TestName = "F_And_F_Returns_F")]
-	public void AndTest(bool first, bool second, bool expected)
-	{
-		var result = Combinator<object>
-			.Where(_ => first)
-			.And(_ => second)
-			.Using(default);
+  [TestCase(true, true, true, TestName = "T_And_T_Returns_T")]
+  [TestCase(true, false, false, TestName = "T_And_F_Returns_F")]
+  [TestCase(false, true, false, TestName = "F_And_T_Returns_F")]
+  [TestCase(false, false, false, TestName = "F_And_F_Returns_F")]
+  public void AndTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator<object>
+      .Where(_ => first)
+      .And(_ => second)
+      .Using(default);
 
-		Assert.That(result, Is.EqualTo(expected));
-	}
+    Assert.That(result, Is.EqualTo(expected));
+  }
 
-	[TestCase(true, true, true, TestName = "T_Or_T_Returns_T")]
-	[TestCase(true, false, true, TestName = "T_Or_F_Returns_T")]
-	[TestCase(false, true, true, TestName = "F_Or_T_Returns_T")]
-	[TestCase(false, false, false, TestName = "F_Or_F_Returns_F")]
-	public void OrTest(bool first, bool second, bool expected)
-	{
-		var result = Combinator<object>
-			.Where(_ => first)
-			.Or(_ => second)
-			.Using(default);
+  [TestCase(true, true, true, TestName = "T_Or_T_Returns_T")]
+  [TestCase(true, false, true, TestName = "T_Or_F_Returns_T")]
+  [TestCase(false, true, true, TestName = "F_Or_T_Returns_T")]
+  [TestCase(false, false, false, TestName = "F_Or_F_Returns_F")]
+  public void OrTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator<object>
+      .Where(_ => first)
+      .Or(_ => second)
+      .Using(default);
 
-		Assert.That(result, Is.EqualTo(expected));
-	}
+    Assert.That(result, Is.EqualTo(expected));
+  }
 
-	[TestCase(true, true, false, TestName = "T_Xor_T_Returns_F")]
-	[TestCase(true, false, true, TestName = "T_Xor_F_Returns_T")]
-	[TestCase(false, true, true, TestName = "F_Xor_T_Returns_T")]
-	[TestCase(false, false, false, TestName = "F_Xor_F_Returns_F")]
-	public void XorTest(bool first, bool second, bool expected)
-	{
-		var result = Combinator<object>
-			.Where(_ => first)
-			.Xor(_ => second)
-			.Using(default);
+  [TestCase(true, true, false, TestName = "T_Xor_T_Returns_F")]
+  [TestCase(true, false, true, TestName = "T_Xor_F_Returns_T")]
+  [TestCase(false, true, true, TestName = "F_Xor_T_Returns_T")]
+  [TestCase(false, false, false, TestName = "F_Xor_F_Returns_F")]
+  public void XorTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator<object>
+      .Where(_ => first)
+      .Xor(_ => second)
+      .Using(default);
 
-		Assert.That(result, Is.EqualTo(expected));
-	}
+    Assert.That(result, Is.EqualTo(expected));
+  }
 
-	[TestCase(true, true, false, TestName = "T_Nand_T_Returns_F")]
-	[TestCase(true, false, true, TestName = "T_Nand_F_Returns_T")]
-	[TestCase(false, true, true, TestName = "F_Nand_T_Returns_T")]
-	[TestCase(false, false, true, TestName = "F_Nand_F_Returns_T")]
-	public void NandTest(bool first, bool second, bool expected)
-	{
-		var result = Combinator<object>
-			.Where(_ => first)
-			.Nand(_ => second)
-			.Using(default);
+  [TestCase(true, true, false, TestName = "T_Nand_T_Returns_F")]
+  [TestCase(true, false, true, TestName = "T_Nand_F_Returns_T")]
+  [TestCase(false, true, true, TestName = "F_Nand_T_Returns_T")]
+  [TestCase(false, false, true, TestName = "F_Nand_F_Returns_T")]
+  public void NandTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator<object>
+      .Where(_ => first)
+      .Nand(_ => second)
+      .Using(default);
 
-		Assert.That(result, Is.EqualTo(expected));
-	}
+    Assert.That(result, Is.EqualTo(expected));
+  }
 
-	[TestCase(true, true, false, TestName = "T_Nor_T_Returns_F")]
-	[TestCase(true, false, false, TestName = "T_Nor_F_Returns_F")]
-	[TestCase(false, true, false, TestName = "F_Nor_T_Returns_F")]
-	[TestCase(false, false, true, TestName = "F_Nor_F_Returns_T")]
-	public void NorTest(bool first, bool second, bool expected)
-	{
-		var result = Combinator<object>
-			.Where(_ => first)
-			.Nor(_ => second)
-			.Using(default);
+  [TestCase(true, true, false, TestName = "T_Nor_T_Returns_F")]
+  [TestCase(true, false, false, TestName = "T_Nor_F_Returns_F")]
+  [TestCase(false, true, false, TestName = "F_Nor_T_Returns_F")]
+  [TestCase(false, false, true, TestName = "F_Nor_F_Returns_T")]
+  public void NorTest(bool first, bool second, bool expected)
+  {
+    var result = Combinator<object>
+      .Where(_ => first)
+      .Nor(_ => second)
+      .Using(default);
 
-		Assert.That(result, Is.EqualTo(expected));
-	}
-	
-	[TestCase(true, false, TestName = "Not_T_Returns_F")]
-	[TestCase(false, true, TestName = "Not_F_Returns_T")]
-	public void NotTest(bool input, bool expected)
-	{
-		var result = Combinator<object>
-			.Where(_ => input)
-			.Not()
-			.Using(default);
+    Assert.That(result, Is.EqualTo(expected));
+  }
 
-		Assert.That(result, Is.EqualTo(expected));
-	}
+  [TestCase(true, false, TestName = "Not_T_Returns_F")]
+  [TestCase(false, true, TestName = "Not_F_Returns_T")]
+  public void NotTest(bool input, bool expected)
+  {
+    var result = Combinator<object>
+      .Where(_ => input)
+      .Not()
+      .Using(default);
+
+    Assert.That(result, Is.EqualTo(expected));
+  }
 
   [TestCase(true, true, true, false, false, TestName = "T_And_T_Or_T_Xor_F_Not_Returns_F")]
   [TestCase(true, true, true, true, true, TestName = "T_And_T_Or_T_Xor_T_Not_Returns_T")]
