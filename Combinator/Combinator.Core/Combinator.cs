@@ -1,4 +1,4 @@
-namespace Combinator.Core;
+namespace Combinator;
 
 using System;
 using System.Runtime.CompilerServices;
